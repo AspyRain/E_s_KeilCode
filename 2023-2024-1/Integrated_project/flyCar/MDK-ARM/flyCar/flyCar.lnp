@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"flycar\startup_stm32f103xb.o"
+"flycar\main.o"
+"flycar\gpio.o"
+"flycar\tim.o"
+"flycar\stm32f1xx_it.o"
+"flycar\stm32f1xx_hal_msp.o"
+"flycar\stm32f1xx_hal_gpio_ex.o"
+"flycar\stm32f1xx_hal_tim.o"
+"flycar\stm32f1xx_hal_tim_ex.o"
+"flycar\stm32f1xx_hal.o"
+"flycar\stm32f1xx_hal_rcc.o"
+"flycar\stm32f1xx_hal_rcc_ex.o"
+"flycar\stm32f1xx_hal_gpio.o"
+"flycar\stm32f1xx_hal_dma.o"
+"flycar\stm32f1xx_hal_cortex.o"
+"flycar\stm32f1xx_hal_pwr.o"
+"flycar\stm32f1xx_hal_flash.o"
+"flycar\stm32f1xx_hal_flash_ex.o"
+"flycar\stm32f1xx_hal_exti.o"
+"flycar\system_stm32f1xx.o"
+--strict --scatter "flyCar\flyCar.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "flyCar.map" -o flyCar\flyCar.axf

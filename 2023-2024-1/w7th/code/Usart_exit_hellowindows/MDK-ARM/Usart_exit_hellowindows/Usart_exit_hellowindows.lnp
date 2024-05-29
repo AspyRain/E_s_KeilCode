@@ -1,0 +1,26 @@
+--cpu Cortex-M3
+"usart_exit_hellowindows\startup_stm32f103xb.o"
+"usart_exit_hellowindows\main.o"
+"usart_exit_hellowindows\gpio.o"
+"usart_exit_hellowindows\usart.o"
+"usart_exit_hellowindows\stm32f1xx_it.o"
+"usart_exit_hellowindows\stm32f1xx_hal_msp.o"
+"usart_exit_hellowindows\stm32f1xx_hal_gpio_ex.o"
+"usart_exit_hellowindows\stm32f1xx_hal_tim.o"
+"usart_exit_hellowindows\stm32f1xx_hal_tim_ex.o"
+"usart_exit_hellowindows\stm32f1xx_hal_uart.o"
+"usart_exit_hellowindows\stm32f1xx_hal.o"
+"usart_exit_hellowindows\stm32f1xx_hal_rcc.o"
+"usart_exit_hellowindows\stm32f1xx_hal_rcc_ex.o"
+"usart_exit_hellowindows\stm32f1xx_hal_gpio.o"
+"usart_exit_hellowindows\stm32f1xx_hal_dma.o"
+"usart_exit_hellowindows\stm32f1xx_hal_cortex.o"
+"usart_exit_hellowindows\stm32f1xx_hal_pwr.o"
+"usart_exit_hellowindows\stm32f1xx_hal_flash.o"
+"usart_exit_hellowindows\stm32f1xx_hal_flash_ex.o"
+"usart_exit_hellowindows\stm32f1xx_hal_exti.o"
+"usart_exit_hellowindows\system_stm32f1xx.o"
+--strict --scatter "Usart_exit_hellowindows\Usart_exit_hellowindows.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "Usart_exit_hellowindows.map" -o Usart_exit_hellowindows\Usart_exit_hellowindows.axf

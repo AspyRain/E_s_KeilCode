@@ -1,0 +1,24 @@
+--cpu Cortex-M3
+"hellousart\startup_stm32f103xb.o"
+"hellousart\main.o"
+"hellousart\stm32f1xx_it.o"
+"hellousart\stm32f1xx_hal_msp.o"
+"hellousart\stm32f1xx_hal_gpio_ex.o"
+"hellousart\stm32f1xx_hal_tim.o"
+"hellousart\stm32f1xx_hal_tim_ex.o"
+"hellousart\stm32f1xx_hal_uart.o"
+"hellousart\stm32f1xx_hal.o"
+"hellousart\stm32f1xx_hal_rcc.o"
+"hellousart\stm32f1xx_hal_rcc_ex.o"
+"hellousart\stm32f1xx_hal_gpio.o"
+"hellousart\stm32f1xx_hal_dma.o"
+"hellousart\stm32f1xx_hal_cortex.o"
+"hellousart\stm32f1xx_hal_pwr.o"
+"hellousart\stm32f1xx_hal_flash.o"
+"hellousart\stm32f1xx_hal_flash_ex.o"
+"hellousart\stm32f1xx_hal_exti.o"
+"hellousart\system_stm32f1xx.o"
+--strict --scatter "HelloUsart\HelloUsart.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "HelloUsart.map" -o HelloUsart\HelloUsart.axf

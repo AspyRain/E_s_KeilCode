@@ -1,0 +1,143 @@
+Dependencies for Project 'OLED', Target 'Target 1': (DO NOT MODIFY !)
+CompilerVersion: 6190000::V6.19::ARMCLANG
+F (.\main.c)(0x5C763A2C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/main.o -MD)
+I (..\SYSTEM\delay\delay.h)(0x50513B7A)
+I (..\SYSTEM\sys\sys.h)(0x5055B57C)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\HARDWARE\OLED\oled.h)(0x5C763A36)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
+I (..\HARDWARE\OLED\bmp.h)(0x544CF1FF)
+F (.\stm32f10x_it.c)(0x4EBEACB0)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/stm32f10x_it.o -MD)
+I (..\USER\stm32f10x_it.h)(0x4D99A426)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (.\system_stm32f10x.c)(0x4D99A426)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/system_stm32f10x.o -MD)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (..\HARDWARE\OLED\oled.c)(0x5C763A36)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/oled.o -MD)
+I (..\HARDWARE\OLED\oled.h)(0x5C763A36)
+I (..\SYSTEM\sys\sys.h)(0x5055B57C)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdlib.h)(0x63884908)
+I (..\HARDWARE\OLED\oledfont.h)(0x5C763A36)
+I (..\SYSTEM\delay\delay.h)(0x50513B7A)
+F (..\SYSTEM\delay\delay.c)(0x544682FA)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/delay.o -MD)
+I (..\SYSTEM\delay\delay.h)(0x50513B7A)
+I (..\SYSTEM\sys\sys.h)(0x5055B57C)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (..\SYSTEM\sys\sys.c)(0x5055B57C)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/sys.o -MD)
+I (..\SYSTEM\sys\sys.h)(0x5055B57C)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (..\SYSTEM\usart\usart.c)(0x50517A98)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/usart.o -MD)
+I (..\SYSTEM\sys\sys.h)(0x5055B57C)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\SYSTEM\usart\usart.h)(0x50517A82)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdio.h)(0x63884908)
+F (..\CORE\core_cm3.c)(0x4C0C587E)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/core_cm3.o -MD)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+F (..\CORE\startup_stm32f10x_hd.s)(0x4D783CDE)(--cpu Cortex-M3 --pd "__EVAL SETA 1" -g --diag_suppress=A1950W-I.\RTE\_Target_1-ID:\software\Keil\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\software\Keil\Packs\Keil\STM32F1xx_DFP\1.1.0\Device\Include--pd "__UVISION_VERSION SETA 538"--pd "_RTE_ SETA 1"--pd "STM32F10X_MD SETA 1"--pd "_RTE_ SETA 1"--list .\startup_stm32f10x_hd.lst--xref -o ..\obj\startup_stm32f10x_hd.o--depend ..\obj\startup_stm32f10x_hd.d)
+F (..\STM32F10x_FWLib\src\misc.c)(0x4D783BB4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/misc.o -MD)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+F (..\STM32F10x_FWLib\src\stm32f10x_gpio.c)(0x4D79EEC6)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/stm32f10x_gpio.o -MD)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (..\STM32F10x_FWLib\src\stm32f10x_rcc.c)(0x4D783BB4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/stm32f10x_rcc.o -MD)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
+F (..\STM32F10x_FWLib\src\stm32f10x_usart.c)(0x4D783BB4)(-xc -std=c99 --target=arm-arm-none-eabi -mcpu=cortex-m3 -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -gdwarf-4 -O1 -fno-function-sections -I ../HARDWARE/LED -I ../SYSTEM/delay -I ../SYSTEM/sys -I ../SYSTEM/usart -I ../USER -I ../STM32F10x_FWLib/inc -I ../CORE -I ../HARDWARE/KEY -I ../HARDWARE/OLED-I./RTE/_Target_1-ID:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include-ID:/software/Keil/Packs/Keil/STM32F1xx_DFP/1.1.0/Device/Include-D__UVISION_VERSION="538" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ../obj/stm32f10x_usart.o -MD)
+I (..\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
+I (..\USER\stm32f10x.h)(0x4D783CB4)
+I (..\CORE\core_cm3.h)(0x4D523B58)
+I (D:\software\Keil\Core\ARM\ARMCLANG\include\stdint.h)(0x63884908)
+I (..\USER\system_stm32f10x.h)(0x4D783CAA)
+I (..\USER\stm32f10x_conf.h)(0x5010D956)
+I (..\STM32F10x_FWLib\inc\stm32f10x_dbgmcu.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\stm32f10x_gpio.h)(0x565FDB69)
+I (..\STM32F10x_FWLib\inc\stm32f10x_rcc.h)(0x4D783BB4)
+I (..\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)

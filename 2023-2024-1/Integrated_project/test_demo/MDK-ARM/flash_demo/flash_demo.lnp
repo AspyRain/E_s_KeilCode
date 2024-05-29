@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"flash_demo\startup_stm32f103xb.o"
+"flash_demo\main.o"
+"flash_demo\gpio.o"
+"flash_demo\usart.o"
+"flash_demo\stm32f1xx_it.o"
+"flash_demo\stm32f1xx_hal_msp.o"
+"flash_demo\data_structure.o"
+"flash_demo\timer.o"
+"flash_demo\stm32f1xx_hal_gpio_ex.o"
+"flash_demo\stm32f1xx_hal_tim.o"
+"flash_demo\stm32f1xx_hal_tim_ex.o"
+"flash_demo\stm32f1xx_hal_uart.o"
+"flash_demo\stm32f1xx_hal.o"
+"flash_demo\stm32f1xx_hal_rcc.o"
+"flash_demo\stm32f1xx_hal_rcc_ex.o"
+"flash_demo\stm32f1xx_hal_gpio.o"
+"flash_demo\stm32f1xx_hal_dma.o"
+"flash_demo\stm32f1xx_hal_cortex.o"
+"flash_demo\stm32f1xx_hal_pwr.o"
+"flash_demo\stm32f1xx_hal_flash.o"
+"flash_demo\stm32f1xx_hal_flash_ex.o"
+"flash_demo\stm32f1xx_hal_exti.o"
+"flash_demo\system_stm32f1xx.o"
+--strict --scatter "flash_demo\flash_demo.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "flash_demo.map" -o flash_demo\flash_demo.axf

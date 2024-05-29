@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"breathe_led\startup_stm32f103xb.o"
+"breathe_led\main.o"
+"breathe_led\gpio.o"
+"breathe_led\tim.o"
+"breathe_led\stm32f1xx_it.o"
+"breathe_led\stm32f1xx_hal_msp.o"
+"breathe_led\stm32f1xx_hal_gpio_ex.o"
+"breathe_led\stm32f1xx_hal_tim.o"
+"breathe_led\stm32f1xx_hal_tim_ex.o"
+"breathe_led\stm32f1xx_hal.o"
+"breathe_led\stm32f1xx_hal_rcc.o"
+"breathe_led\stm32f1xx_hal_rcc_ex.o"
+"breathe_led\stm32f1xx_hal_gpio.o"
+"breathe_led\stm32f1xx_hal_dma.o"
+"breathe_led\stm32f1xx_hal_cortex.o"
+"breathe_led\stm32f1xx_hal_pwr.o"
+"breathe_led\stm32f1xx_hal_flash.o"
+"breathe_led\stm32f1xx_hal_flash_ex.o"
+"breathe_led\stm32f1xx_hal_exti.o"
+"breathe_led\system_stm32f1xx.o"
+--strict --scatter "breathe_LED\breathe_LED.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "breathe_LED.map" -o breathe_LED\breathe_LED.axf

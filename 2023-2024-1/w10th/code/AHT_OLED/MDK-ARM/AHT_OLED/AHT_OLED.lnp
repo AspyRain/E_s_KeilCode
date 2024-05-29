@@ -1,0 +1,28 @@
+--cpu Cortex-M3
+"aht_oled\startup_stm32f103xb.o"
+"aht_oled\main.o"
+"aht_oled\gpio.o"
+"aht_oled\i2c.o"
+"aht_oled\stm32f1xx_it.o"
+"aht_oled\stm32f1xx_hal_msp.o"
+"aht_oled\oled.o"
+"aht_oled\aht20.o"
+"aht_oled\stm32f1xx_hal_gpio_ex.o"
+"aht_oled\stm32f1xx_hal_i2c.o"
+"aht_oled\stm32f1xx_hal.o"
+"aht_oled\stm32f1xx_hal_rcc.o"
+"aht_oled\stm32f1xx_hal_rcc_ex.o"
+"aht_oled\stm32f1xx_hal_gpio.o"
+"aht_oled\stm32f1xx_hal_dma.o"
+"aht_oled\stm32f1xx_hal_cortex.o"
+"aht_oled\stm32f1xx_hal_pwr.o"
+"aht_oled\stm32f1xx_hal_flash.o"
+"aht_oled\stm32f1xx_hal_flash_ex.o"
+"aht_oled\stm32f1xx_hal_exti.o"
+"aht_oled\stm32f1xx_hal_tim.o"
+"aht_oled\stm32f1xx_hal_tim_ex.o"
+"aht_oled\system_stm32f1xx.o"
+--strict --scatter "AHT_OLED\AHT_OLED.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "AHT_OLED.map" -o AHT_OLED\AHT_OLED.axf

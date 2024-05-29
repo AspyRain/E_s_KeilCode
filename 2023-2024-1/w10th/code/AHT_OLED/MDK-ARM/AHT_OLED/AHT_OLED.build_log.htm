@@ -1,0 +1,88 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: lv Ç¬, lv, LIC=585FJ-U1KVG-LQD0Q-NIDY9-T25WQ-ESL0Y
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.38.0.0
+Toolchain Path:  D:\software\Keil\Core\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      UL2CM3.DLL V1.164.8.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\study\Keil Code\QRS\w10th\code\AHT_OLED\MDK-ARM\AHT_OLED.uvprojx
+Project File Date:  01/30/2024
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'D:\software\Keil\Core\ARM\ARMCLANG\Bin'
+Build target 'AHT_OLED'
+compiling stm32f1xx_it.c...
+compiling stm32f1xx_hal_gpio_ex.c...
+compiling i2c.c...
+compiling stm32f1xx_hal_msp.c...
+compiling gpio.c...
+compiling stm32f1xx_hal_rcc_ex.c...
+../Core/Src/main.c(117): warning: passing 'char[100]' to parameter of type 'uint8_t *' (aka 'unsigned char *') converts between pointers to integer types where one is of the unique plain 'char' type and the other is not [-Wpointer-sign]
+OLED_ShowString(36,2,RH_buffer,16);
+                     ^~~~~~~~~
+../Core/Src/oled.h(46): note: passing argument to parameter 'chr' here
+void OLED_ShowString(uint8_t x,uint8_t y,uint8_t *chr,uint8_t Char_Size);
+                                                  ^
+1 warning generated.
+compiling main.c...
+compiling stm32f1xx_hal.c...
+compiling stm32f1xx_hal_cortex.c...
+compiling AHT20.c...
+compiling stm32f1xx_hal_gpio.c...
+compiling stm32f1xx_hal_rcc.c...
+compiling stm32f1xx_hal_dma.c...
+compiling oled.c...
+compiling stm32f1xx_hal_pwr.c...
+compiling stm32f1xx_hal_tim_ex.c...
+compiling stm32f1xx_hal_tim.c...
+compiling stm32f1xx_hal_exti.c...
+compiling stm32f1xx_hal_flash.c...
+compiling stm32f1xx_hal_flash_ex.c...
+compiling system_stm32f1xx.c...
+compiling stm32f1xx_hal_i2c.c...
+linking...
+Program Size: Code=17360 RO-data=2564 RW-data=492 ZI-data=2028  
+FromELF: creating hex file...
+"AHT_OLED\AHT_OLED.axf" - 0 Error(s), 1 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                http://www.wch.cn/Keil.WCH32F1xx_DFP.1.0.1.pack
+                Keil.WCH32F1xx_DFP.1.0.1
+                WCH CH32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_AHT_OLED
+  D:/software/Keil/Packs/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  D:/software/Keil/Packs/Keil/WCH32F1xx_DFP/1.0.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>

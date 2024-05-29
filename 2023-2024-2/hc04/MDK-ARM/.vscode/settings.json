@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "hc-sr04.h": "c",
+        "gpio.h": "c"
+    }
+}

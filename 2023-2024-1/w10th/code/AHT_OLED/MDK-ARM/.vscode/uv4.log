@@ -1,0 +1,4 @@
+Load "AHT_OLED\\AHT_OLED.axf" 
+Error: Not a genuine ST Device! Abort connection. 
+Erase Done.Programming Failed!Error: Flash Download failed  -  "Cortex-M3"
+Flash Load finished at 13:16:30
