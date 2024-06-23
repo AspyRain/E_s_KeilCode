@@ -6,15 +6,15 @@ stm32_f1_hc-sr04/usart.o: ..\Core\Src\usart.c ..\Core\Inc\usart.h \
   ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f1xx.h \
   ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\stm32f103xb.h \
   ..\Drivers\CMSIS\Include\core_cm3.h \
-  E:\software\Keil_v5\ARM\ARMCLANG\include\stdint.h \
-  E:\study\Keil\ Code\QRS\2023-2024-2\hc_04_demo2\Drivers\CMSIS\Include\cmsis_version.h \
-  E:\study\Keil\ Code\QRS\2023-2024-2\hc_04_demo2\Drivers\CMSIS\Include\cmsis_compiler.h \
-  E:\study\Keil\ Code\QRS\2023-2024-2\hc_04_demo2\Drivers\CMSIS\Include\cmsis_armclang.h \
-  E:\software\Keil_v5\ARM\ARMCLANG\include\arm_compat.h \
-  E:\software\Keil_v5\ARM\ARMCLANG\include\arm_acle.h \
+  D:\software\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdint.h \
+  ..\Drivers\CMSIS\Include\cmsis_version.h \
+  ..\Drivers\CMSIS\Include\cmsis_compiler.h \
+  ..\Drivers\CMSIS\Include\cmsis_armclang.h \
+  D:\software\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_compat.h \
+  D:\software\Keil_v5\ARM\ARMCLANG\Bin\..\include\arm_acle.h \
   ..\Drivers\CMSIS\Device\ST\STM32F1xx\Include\system_stm32f1xx.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h \
-  E:\software\Keil_v5\ARM\ARMCLANG\include\stddef.h \
+  D:\software\Keil_v5\ARM\ARMCLANG\Bin\..\include\stddef.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_rcc_ex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_gpio_ex.h \
@@ -28,4 +28,4 @@ stm32_f1_hc-sr04/usart.o: ..\Core\Src\usart.c ..\Core\Inc\usart.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_tim_ex.h \
   ..\Drivers\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal_uart.h \
-  E:\software\Keil_v5\ARM\ARMCLANG\include\stdio.h
+  D:\software\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h

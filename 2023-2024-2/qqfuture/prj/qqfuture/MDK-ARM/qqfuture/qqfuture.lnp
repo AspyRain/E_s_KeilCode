@@ -1,0 +1,25 @@
+--cpu Cortex-M3
+"qqfuture\startup_stm32f103xb.o"
+"qqfuture\main.o"
+"qqfuture\gpio.o"
+"qqfuture\tim.o"
+"qqfuture\stm32f1xx_it.o"
+"qqfuture\stm32f1xx_hal_msp.o"
+"qqfuture\stm32f1xx_hal_gpio_ex.o"
+"qqfuture\stm32f1xx_hal_tim.o"
+"qqfuture\stm32f1xx_hal_tim_ex.o"
+"qqfuture\stm32f1xx_hal.o"
+"qqfuture\stm32f1xx_hal_rcc.o"
+"qqfuture\stm32f1xx_hal_rcc_ex.o"
+"qqfuture\stm32f1xx_hal_gpio.o"
+"qqfuture\stm32f1xx_hal_dma.o"
+"qqfuture\stm32f1xx_hal_cortex.o"
+"qqfuture\stm32f1xx_hal_pwr.o"
+"qqfuture\stm32f1xx_hal_flash.o"
+"qqfuture\stm32f1xx_hal_flash_ex.o"
+"qqfuture\stm32f1xx_hal_exti.o"
+"qqfuture\system_stm32f1xx.o"
+--strict --scatter "qqfuture\qqfuture.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "qqfuture.map" -o qqfuture\qqfuture.axf
