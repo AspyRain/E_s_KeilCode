@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "tim.h"
+#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -67,7 +68,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void set_speed(){
+void initial_speed(){
 	base_speed=(base_speed*65535)/100;
 	low_speed=(base_speed*65535)/100;
 	correction_speed=(correction_speed*65535)/100;
@@ -100,15 +101,27 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
-	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);
+
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
+  MX_USART1_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+	initial_speed();
 	HAL_GPIO_WritePin(enable_L_GPIO_Port,enable_L_Pin,GPIO_PIN_SET);
+	HAL_GPIO_WritePin(enable_R_GPIO_Port,enable_R_Pin,GPIO_PIN_SET);
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_4);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_1);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_2);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_3);
+	HAL_TIM_PWM_Start(&htim3,TIM_CHANNEL_4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -116,12 +129,24 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,base_speed);
-		__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,0);
-		HAL_Delay(1000);
-		__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,base_speed);
-		__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,0);
-		HAL_Delay(1000);
+		for(int i = 1 ; i<=4 ;i++){
+			set_speed(i,turning_speed,0);
+		}
+		HAL_Delay(2000);
+		for(int i = 1 ; i<=4 ;i++){
+			set_speed(i,turning_speed,1);
+		}
+		HAL_Delay(2000);
+		set_speed(1,turning_speed,0);
+		set_speed(2,turning_speed,0);
+		set_speed(3,turning_speed,1);
+		set_speed(4,turning_speed,1);
+		HAL_Delay(2000);
+		set_speed(1,turning_speed,1);
+		set_speed(2,turning_speed,1);
+		set_speed(3,turning_speed,0);
+		set_speed(4,turning_speed,0);
+		HAL_Delay(2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -164,7 +189,51 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void set_speed(int i,int speed,int dir){
+	switch (i){
+		case 1:{
+			if (dir==0){
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,speed);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,0);
+			}else {
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_4,speed);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_3,0);
+			}
+			break;
+		}
+		case 2:{
+			if (dir==0){
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,speed);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,0);
+			}else {
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_4,speed);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_3,0);
+			}
+			break;
+		}
+		case 3:{
+			if (dir==0){
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,speed);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,0);
+			}else {
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_2,speed);
+				__HAL_TIM_SET_COMPARE(&htim3,TIM_CHANNEL_1,0);
+			}
+			break;
+		}
+		case 4:{
+			if (dir==0){
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,speed);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,0);
+			}else {
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_2,speed);
+				__HAL_TIM_SET_COMPARE(&htim2,TIM_CHANNEL_1,0);
+			}
+			break;
+		}
+		
+	}
+}
 /* USER CODE END 4 */
 
 /**
