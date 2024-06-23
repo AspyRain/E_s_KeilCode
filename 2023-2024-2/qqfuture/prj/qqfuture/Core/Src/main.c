@@ -21,6 +21,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include <rtthread.h>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -129,24 +130,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-		for(int i = 1 ; i<=4 ;i++){
-			set_speed(i,turning_speed,0);
-		}
-		HAL_Delay(2000);
-		for(int i = 1 ; i<=4 ;i++){
-			set_speed(i,turning_speed,1);
-		}
-		HAL_Delay(2000);
-		set_speed(1,turning_speed,0);
-		set_speed(2,turning_speed,0);
-		set_speed(3,turning_speed,1);
-		set_speed(4,turning_speed,1);
-		HAL_Delay(2000);
-		set_speed(1,turning_speed,1);
-		set_speed(2,turning_speed,1);
-		set_speed(3,turning_speed,0);
-		set_speed(4,turning_speed,0);
-		HAL_Delay(2000);
+rt_thread_mdelay(1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
