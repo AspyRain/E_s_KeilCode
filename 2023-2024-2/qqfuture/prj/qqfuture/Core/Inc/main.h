@@ -87,8 +87,9 @@ void Error_Handler(void);
 #define BT_RX_GPIO_Port GPIOA
 
 /* USER CODE BEGIN Private defines */
-void initial_speed();
 void set_speed(int i,int speed,int dir);
+void testReceive(int actionId);
+void speedController(int actionId);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

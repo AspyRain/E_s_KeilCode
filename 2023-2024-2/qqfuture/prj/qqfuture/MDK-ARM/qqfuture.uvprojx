@@ -82,7 +82,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -330,7 +330,7 @@
             <uC99>1</uC99>
             <uGnu>0</uGnu>
             <useXO>0</useXO>
-            <v6Lang>3</v6Lang>
+            <v6Lang>1</v6Lang>
             <v6LangP>5</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -686,6 +686,16 @@
             </GroupArmAds>
           </GroupOption>
           <Files>
+            <File>
+              <FileName>rtconfig.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\RT-Thread\rtconfig.h</FilePath>
+            </File>
+            <File>
+              <FileName>rtdef.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Middlewares\Third_Party\RealThread_RTOS\include\rtdef.h</FilePath>
+            </File>
             <File>
               <FileName>context_rvds.S</FileName>
               <FileType>2</FileType>
@@ -1680,16 +1690,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>rtconfig.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\RT-Thread\rtconfig.h</FilePath>
-            </File>
-            <File>
-              <FileName>rtdef.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Middlewares\Third_Party\RealThread_RTOS\include\rtdef.h</FilePath>
             </File>
           </Files>
         </Group>
