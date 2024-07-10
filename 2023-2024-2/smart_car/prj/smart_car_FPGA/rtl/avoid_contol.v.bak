@@ -1,0 +1,420 @@
+/*管脚说明：
+管脚名		标签		 用途
+L1_IN1		PB10(T2C3)	左前轮信号输入1
+L1_IN2		PB11(T2C4)	左前轮信号输入2
+L2_IN1		PB0(T3C3)	左后轮信号输入1
+L2_IN2		PB1(T3C4)	左后轮信号输入2
+R1_IN1		PA6(T3C1)	右前轮信号输入1
+R1_IN2		PA7(T3C2)	右前轮信号输入2
+R2_IN1		PA0(T2C1)	右后轮信号输入1
+R2_IN2		PA1(T2C2)	右后轮信号输入2
+enable_L	PB13		左侧轮胎使能信号
+enable_R	PB12		右侧轮胎使能信号
+*/
+
+// 逻辑功能描述：
+/*  
+        初始状态
+            车辆状态：前进
+            基础速度：50%
+
+        车头测距
+            head_distance >  10cm       ：方向不变，            速度不变
+            head_distance <= 10cm       ：方向不变，            减速：速度 = head_distance * base_speed * 10%
+            head_distance <= 5cm        ：停止  
+
+        左车身测距  
+            left_distance <= 5cm        ：方向改变，向右拐，     速度 = 20%
+
+        右车身测距  
+            right_distance <= 5cm       ：方向改变，向左拐，     速度 = 20%
+
+        车尾测距    
+            tail_distance >  10cm       ：方向不变，            速度不变
+            tail_distance <= 10cm       ：方向不变，            减速，速度 = head_distance * base_speed * 10%
+            tail_distance <= 5cm        ：停止  
+
+        优先级
+            当满足多个条件时，优先级顺序为
+                                          车头
+                                          车尾
+                                          左车身
+                                          右车身
+
+        测距使能：
+        当测距模块输出为0时，表示测距模块未工作，由人工控制车辆运动
+        当测距模块输出为1时，表示测距模块工作，提醒操作人：车辆即将变速
+
+        速度与方向的控制参数 16位 car_speed_output       //1+7+1+7
+
+
+*/ 
+/*
+    根据逻辑功能设计状态机：
+        状态机状态：
+            IDLE    ：初始状态
+            FORWARD ：前进
+            LEFT_DIS    ：左拐
+            RIGHT_DIS   ：右拐
+            STOP    ：停止
+
+        状态转移条件：
+        IDLE ：
+            head_distance <= 5cm    ：STOP
+            head_distance <= 10cm   ：FORWARD
+            right_distance <= 5cm   ：LEFT_DIS
+            left_distance <= 5cm    ：RIGHT_DIS
+            tail_distance <= 5cm    ：STOP
+
+        FORWARD ：
+            head_distance <= 5cm    ：STOP
+            head_distance <= 10cm   ：FORWARD
+            right_distance <= 5cm   ：LEFT_DIS
+            left_distance <= 5cm    ：RIGHT_DIS
+            tail_distance <= 5cm    ：STOP
+
+        LEFT_DIS ：
+            head_distance <= 5cm    ：STOP
+            head_distance <= 10cm   ：FORWARD
+            right_distance <= 5cm   ：LEFT_DIS
+            left_distance <= 5cm    ：RIGHT_DIS
+            tail_distance <= 5cm    ：STOP
+
+        RIGHT_DIS ：
+            head_distance <= 5cm    ：STOP
+            head_distance <= 10cm   ：FORWARD
+            right_distance <= 5cm   ：LEFT_DIS
+            left_distance <= 5cm    ：RIGHT_DIS
+            tail_distance <= 5cm    ：STOP
+            
+        STOP ：
+            head_distance <= 5cm    ：STOP
+            head_distance <= 10cm   ：FORWARD
+            right_distance <= 5cm   ：LEFT_DIS
+            left_distance <= 5cm    ：RIGHT_DIS
+            tail_distance <= 5cm    ：STOP
+    */
+
+module avoid_control (
+    input       wire            clk,
+    input       wire            rst,
+
+    input       wire [12:0]      head_distance  ,
+    input       wire [12:0]      right_distance ,
+    input       wire [12:0]      left_distance  ,
+    input       wire [12:0]      tail_distance  ,
+    input       wire [15:0]      car_speed_input,       //传入遥控模块的速度参数
+    input       wire [3:0]       state_ctrl     ,
+
+    output      wire [7:0]       close_flag     ,       //距离状态参数 [前，后，左，右]；各两位
+
+
+    output reg [15:0]   car_speed_output
+);
+    reg        [1:0]    front_triggered     ;
+    reg        [1:0]    back_triggered      ;
+    reg        [1:0]    left_triggered      ;
+    reg        [1:0]    right_triggered     ; 
+    parameter           FRONT_DIS   =   1       ,
+                        BACK_DIS    =   2       ,
+                        LEFT_DIS    =   3       ,
+                        RIGHT_DIS   =   4       ;
+
+    parameter   LEFT = 1            ,
+                RIGHT = 2           ,
+                FORWARD = 3         ,
+                BACK = 4            ,
+                LEFT_FORWARD =5     ,
+                LEFT_BACK = 6       ,
+                RIGHT_FORWARD = 7   ,
+                RIGHT_BACK = 8      ,
+                STOP = 0            ;
+    
+
+    always @(posedge clk or negedge rst) begin
+        if (!rst)begin
+            front_triggered <= 2'b00;
+            back_triggered <= 2'b00;
+            left_triggered <= 2'b00;
+            right_triggered <= 2'b00;
+        end
+        else begin
+            //设置trigger触发
+            //头部
+            if (head_distance < 13'd100)begin
+                if (head_distance < 13'd50)begin
+                    front_triggered <= 2'b10;
+                end
+                else begin
+                    front_triggered <= 2'b01;
+                end
+            end
+            else begin
+                front_triggered <= 2'b00;
+            end
+        end
+    end
+    //
+    //判断 障距
+    always @(*) begin
+
+        // 根据状态触发设置速度
+        case ({front_triggered[1:0], back_triggered[1:0], left_triggered[1:0], right_triggered[1:0]})
+            
+            8'b01000000: begin 
+                //头部触发处理 第一阶段
+                if (state_ctrl == FORWARD)
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_FORWARD)
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_FORWARD)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b01000100: begin 
+                //头 1 左 1
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD)
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( left_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_FORWARD)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b01000001: begin 
+                //头 1 右 1
+                if (state_ctrl == FORWARD || state_ctrl == RIGHT_FORWARD )
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( right_distance- 30)/70)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_FORWARD )
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b01001000: begin 
+                //头 1 左 2
+                if (state_ctrl == FORWARD)
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_FORWARD || state_ctrl == LEFT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= 16'b0;
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b01000010: begin 
+                //头 1 左 2
+                if (state_ctrl == FORWARD)
+                    car_speed_output<= {car_speed_input[15],(( head_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_FORWARD || state_ctrl == RIGHT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= 16'b0;
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b01000000: begin 
+                //头部触发处理 第二阶段
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD || state_ctrl == RIGHT_FORWARD)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+                end
+
+            8'b10000100: begin 
+                //头 2 左 1
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD || state_ctrl == RIGHT_FORWARD)
+                    car_speed_output<= 16'b0;
+                else if (state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( left_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else begin
+                    car_speed_output <= car_speed_input;
+                end
+            end
+
+            8'b10000001: begin 
+                //头 2 右 1
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD || state_ctrl == RIGHT_FORWARD)
+                    car_speed_output<= 16'b0;
+                if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( head_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( right_distance- 30)/70)*car_speed_input[6:0]};
+                else begin
+                    car_speed_output <= car_speed_input;
+                end
+            end
+
+            8'b10001000:begin
+                //头 2 左 2 
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD || state_ctrl == RIGHT_FORWARD || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == LEFT_BACK)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b10000010:begin
+                //头 2 右 2 
+                if (state_ctrl == FORWARD || state_ctrl == LEFT_FORWARD || state_ctrl == RIGHT_FORWARD || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == RIGHT_BACK)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+
+
+
+
+            8'b00010000: begin 
+                //尾部触发处理 第一阶段
+                if (state_ctrl == BACK)
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00010100: begin 
+                //头 1 左 1
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( left_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00010001: begin 
+                //头 1 右 1
+                if (state_ctrl == BACK || state_ctrl == RIGHT_BACK )
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( right_distance- 30)/70)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_BACK )
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],car_speed_input[6:0]};
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00011000: begin 
+                //头 1 左 2
+                if (state_ctrl == BACK)
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_BACK || state_ctrl == LEFT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= 16'b0;
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00010010: begin 
+                //头 1 左 2
+                if (state_ctrl == BACK)
+                    car_speed_output<= {car_speed_input[15],(( tail_distance- 50)/50)*car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_BACK || state_ctrl == RIGHT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= 16'b0;
+                else  
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00010000: begin 
+                //头部触发处理 第二阶段
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK || state_ctrl == RIGHT_BACK)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+                end
+
+            8'b00100100: begin 
+                //头 2 左 1
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK || state_ctrl == RIGHT_BACK)
+                    car_speed_output<= 16'b0;
+                if (state_ctrl == LEFT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( left_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else begin
+                    car_speed_output <= car_speed_input;
+                end
+            end
+
+            8'b00100001: begin 
+                //头 2 右 1
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK || state_ctrl == RIGHT_BACK)
+                    car_speed_output<= 16'b0;
+                if (state_ctrl == RIGHT_BACK)
+                    car_speed_output<= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],(( tail_distance- 50)/50)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( right_distance- 30)/70)*car_speed_input[6:0]};
+                else begin
+                    car_speed_output <= car_speed_input;
+                end
+            end
+
+            8'b00101000:begin
+                //头 2 左 2 
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK || state_ctrl == RIGHT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == LEFT_BACK)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00100010:begin
+                //头 2 右 2 
+                if (state_ctrl == BACK || state_ctrl == LEFT_BACK || state_ctrl == RIGHT_BACK || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == RIGHT_BACK)
+                    car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+
+            8'b00000100:begin
+                //左 1 
+                if (state_ctrl == FORWARD || state_ctrl == BACK)
+                    car_speed_output <= {car_speed_input[15],( left_distance/100)*car_speed_input[14:8],car_speed_input[7],( left_distance/100)*car_speed_input[6:0]};
+                else if (state_ctrl == LEFT_FORWARD || state_ctrl == LEFT_BACK)
+                    car_speed_output <= {car_speed_input[15],car_speed_input[14:8],car_speed_input[7],( (left_distance +40)/70)*car_speed_input[14:8]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( left_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( left_distance- 30)/70)*car_speed_input[6:0]};
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00000001:begin
+                //右 1 
+                if (state_ctrl == FORWARD || state_ctrl == BACK)
+                    car_speed_output <= {car_speed_input[15],( right_distance/100)*car_speed_input[14:8],car_speed_input[7],( right_distance/100)*car_speed_input[6:0]};
+                else if (state_ctrl == RIGHT_FORWARD || state_ctrl == RIGHT_BACK)
+                    car_speed_output <= {car_speed_input[15],((right_distance +40)/70)*car_speed_input[14:8],car_speed_input[7],car_speed_input[14:8]};
+                else if (state_ctrl == LEFT || state_ctrl == RIGHT)
+                    car_speed_output<= {car_speed_input[15],(( right_distance- 30)/70)*car_speed_input[14:8],car_speed_input[7],(( right_distance- 30)/70)*car_speed_input[6:0]};
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            8'b00001000:begin
+                //左 2 
+                if (state_ctrl == LEFT_FORWARD || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == LEFT_BACK)
+                     car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+             8'b00000010:begin
+                //右 2 
+                if (state_ctrl == RIGHT_FORWARD || state_ctrl == LEFT || state_ctrl == RIGHT || state_ctrl == RIGHT_BACK)
+                     car_speed_output<= 16'b0;
+                else 
+                    car_speed_output <= car_speed_input;
+            end
+            default: begin
+                // 无优先级触发或手动控制
+                car_speed_output <= car_speed_input;
+            end
+        endcase
+    end
+
+    assign close_flag = {front_triggered,back_triggered,left_triggered,right_triggered}
+    
+endmodule

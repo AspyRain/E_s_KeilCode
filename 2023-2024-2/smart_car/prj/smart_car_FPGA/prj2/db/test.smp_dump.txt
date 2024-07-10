@@ -1,0 +1,18 @@
+
+State Machine - |top4bt_avi|uart_string_send:UART_SEND0|state
+Name state.IDLE state.FINISH state.SEND 
+state.IDLE 0 0 0 
+state.SEND 1 0 1 
+state.FINISH 1 1 0 
+
+State Machine - |top4bt_avi|btCarTop:inst_btCarTop|speedGnrt:inst_speedGnrt|state_c
+Name state_c.RIGHT_FORWARD state_c.LEFT_BACK state_c.LEFT_FORWARD state_c.BACK state_c.FORWARD state_c.RIGHT state_c.LEFT state_c.STOP state_c.RIGHT_BACK 
+state_c.STOP 0 0 0 0 0 0 0 0 0 
+state_c.LEFT 0 0 0 0 0 0 1 1 0 
+state_c.RIGHT 0 0 0 0 0 1 0 1 0 
+state_c.FORWARD 0 0 0 0 1 0 0 1 0 
+state_c.BACK 0 0 0 1 0 0 0 1 0 
+state_c.LEFT_FORWARD 0 0 1 0 0 0 0 1 0 
+state_c.LEFT_BACK 0 1 0 0 0 0 0 1 0 
+state_c.RIGHT_FORWARD 1 0 0 0 0 0 0 1 0 
+state_c.RIGHT_BACK 0 0 0 0 0 0 0 1 1 

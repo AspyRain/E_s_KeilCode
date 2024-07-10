@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="bg_purple">#5C77C5</color>
+    <color name="button_blue">#CC03A9F4</color>
+    <color name="button_blue_clicked">#CC00BCD4</color>
+    <color name="main_bg">#F4F4F4</color>
+    <color name="top_bar_blue_start">#01D5FE</color>
+    <color name="top_bar_blue_end">#00A6FD</color>
+    <color name="base_white">#FBFBFA</color>
+    <color name="浅灰">#EFEFE9</color>
+    <color name="trans_white">#60FBFBFA</color>
+    <color name="half_white">#C4FBFBFA</color>
+    <color name="灰色">#999999</color>
+    <color name="chat_bg">#F0F0F0</color>
+    <color name="chat_bar">#F7F7F7</color>
+    <color name="chatting_bubble">#0198FE</color>
+    <color name="start_purple">#3C65DC</color>
+    <color name="end_purple">#7C8FE4</color>
+    <color name="start_purple_trans">#CC3C65DC</color>
+    <color name="end_purple_trans">#CC7C8FE4</color>
+    <color name="button_灰">#E5E5E5</color>
+    <color name="red">#E85353</color>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="deep_red">#DF1313</color>
+</resources>

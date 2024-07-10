@@ -1,0 +1,3 @@
+Info (10281): Verilog HDL Declaration information at uart_string_send.v(41): object "idle" differs only in case from object "IDLE" in the same scope File: D:/study/Keil Code/QRS/E_s_KeilCode/2023-2024-2/qqfuture/prj/qqfutrueFPGA/rtl/uart_string_send.v Line: 41
+Warning (10268): Verilog HDL information at speedGnrt.v(146): always construct contains both blocking and non-blocking assignments File: D:/study/Keil Code/QRS/E_s_KeilCode/2023-2024-2/qqfuture/prj/qqfutrueFPGA/rtl/speedGnrt.v Line: 146
+Warning (10268): Verilog HDL information at pwmCtrl.v(19): always construct contains both blocking and non-blocking assignments File: D:/study/Keil Code/QRS/E_s_KeilCode/2023-2024-2/qqfuture/prj/qqfutrueFPGA/rtl/pwmCtrl.v Line: 19
